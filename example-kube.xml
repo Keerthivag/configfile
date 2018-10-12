@@ -52,7 +52,7 @@
 				<property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>
 				<!-- Set concurrency level -->
 				<property name="concurrencyLevel" value="80"/>
-				<!-- Set the page size to 8 KB -->
+				<!-- Set the page size to 40 KB -->
 				<property name="pageSize" value="40960"/>
 			  </bean>
 			</property>
