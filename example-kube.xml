@@ -35,13 +35,17 @@
 				<property name="name" value="Default_Region"/>
 				<!-- Setting the size of the default region to 10GB. -->
 				<property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>
-				<property name="persistenceEnabled" value="true"/>				
+				<property name="persistenceEnabled" value="true"/>
+				<!-- Increasing the buffer size to 1 GB. -->
+				<property name="checkpointPageBufferSize" value="#{1L * 1024 * 1024 * 1024}"/>				
 			  </bean>
 			</property>
 			<!-- Set the page size to 8 KB -->
 			<property name="pageSize" value="#{8 * 1024}"/>
 			<!-- Changing WAL Mode. --> 
 			<property name="walMode" value="NONE"/>
+			<!-- Enable write throttling. -->
+			<property name="writeThrottlingEnabled" value="true"/>
 		  </bean>
 		</property>
 		
