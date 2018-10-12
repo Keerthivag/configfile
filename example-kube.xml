@@ -25,8 +25,22 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean class="org.apache.ignite.configuration.IgniteConfiguration">
-
-        <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
+	
+		<!-- Redefining maximum memory size for the cluster node usage. -->  
+		<property name="dataStorageConfiguration">
+		  <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+			<!-- Redefining the default region's settings -->
+			<property name="defaultDataRegionConfiguration">
+			  <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+				<property name="name" value="Default_Region"/>
+				<!-- Setting the size of the default region to 10GB. -->
+				<property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>				
+			  </bean>
+			</property>
+		  </bean>
+		</property>
+		
+		        <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
         <property name="discoverySpi">
             <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
                 <property name="ipFinder">
@@ -41,22 +55,5 @@
             </bean>
         </property>
 		
-		<!-- Redefining maximum memory size for the cluster node usage. -->  
-		<property name="dataStorageConfiguration">
-		  <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
-			<!-- Redefining the default region's settings -->
-			<property name="defaultDataRegionConfiguration">
-			  <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
-				<property name="name" value="Default_Region"/>
-				<!-- Setting the size of the default region to 10GB. -->
-				<property name="maxSize" value="#{10L * 1024 * 1024 * 1024}"/>				
-			  </bean>
-			</property>
-			<!-- Set concurrency level -->
-			<property name="concurrencyLevel" value="80"/>
-			<!-- Set the page size to 40 KB -->
-			<property name="pageSize" value="40960"/>
-		  </bean>
-		</property>
     </bean>
 </beans>
